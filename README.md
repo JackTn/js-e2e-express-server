@@ -1,7 +1,6 @@
 
 [![Build Status](https://dev.azure.com/v-tianxi0853/v-tianxi/_apis/build/status/JackTn.js-e2e-express-server?branchName=main)](https://dev.azure.com/v-tianxi0853/v-tianxi/_build/latest?definitionId=3&branchName=main)
 
-[![Build Status](https://dev.azure.com/v-tianxi0853/v-tianxi/_apis/build/status/JackTn.js-e2e-express-server%20(1)?branchName=main)](https://dev.azure.com/v-tianxi0853/v-tianxi/_build/latest?definitionId=4&branchName=main)
 ---
 page_type: sample
 languages:

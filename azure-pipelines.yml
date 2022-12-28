@@ -29,13 +29,19 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: 'Write-Host $($env:name)'
+    script: 'Write-Host ${env:NAME}'
+
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'Write-Host $($env:NAME)'
     
 
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: 'Write-Host $env:name'
+    script: 'Write-Host $env:NAME'
 
 - task: Bash@3
   inputs:

@@ -9,6 +9,10 @@ parameters:
   type: number
   default: 18
 
+variables:
+- name: age
+  value: 13 
+
 trigger:
 - main
 
@@ -49,3 +53,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'echo ${{ parameters.age }}'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'echo ${{ variables.age }}'

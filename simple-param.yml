@@ -6,3 +6,4 @@ parameters:
 
 steps:
 - script: echo ${{ parameters.yesNo }}
+  displayName: 'cmd: test-parameter'

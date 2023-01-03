@@ -19,6 +19,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+
 steps:
 - task: NodeTool@0
   inputs:
@@ -29,6 +30,7 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
 
 - script: |
    echo building $(Build.BuildNumber) with ${{ parameters.age }}
@@ -58,3 +60,9 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'echo ${{ variables.age }}'
+
+
+extends:
+  template: simple-param.yml
+  parameters:
+      yesNo: false # set to a non-boolean value to have the build fail

@@ -10,6 +10,7 @@ parameters:
 stages:
 - stage: secure_buildstage
   pool:
+    name: 'stages-windows-pool'
     vmImage: windows-latest
   jobs:
   - job: secure_buildjob

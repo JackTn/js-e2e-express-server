@@ -7,6 +7,43 @@ parameters:
 - name: age
   type: number
   default: 1888888
+- name: myNumber
+  type: number
+  default: 2
+  values:
+  - 1
+  - 2
+  - 4
+  - 8
+  - 16
+- name: myObject
+  type: object
+  default:
+    foo: FOO
+    bar: BAR
+    things:
+    - one
+    - two
+    - three
+    nested:
+      one: apple
+      two: pear
+      count: 3
+- name: myStep
+  type: step
+  default:
+    script: echo my step
+- name: mySteplist
+  type: stepList
+  default:
+    - script: echo step one
+    - script: echo step two
+- name: listOfStrings
+  type: object
+  default:
+  - one
+  - two
+
 
 variables:
 - name: age
@@ -18,8 +55,11 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-
 steps:
+- ${{ each value in parameters.listOfStrings }}:
+- script: echo ${{ value }}
+  displayName: 'loop parameters.listOfStrings'
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'

@@ -7,11 +7,11 @@ parameters:
 - name: age
   displayName: testParam
   type: number
-  default: 18
+  default: 1888888
 
 variables:
 - name: age
-  value: 13 
+  value: 133333 
 
 trigger:
 - main
@@ -21,42 +21,46 @@ pool:
 
 
 steps:
-# - task: NodeTool@0
-  # inputs:
-    # versionSpec: '10.x'
-  # displayName: 'Install Node.js'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
 
-# - script: |
-    # npm install
-    # npm run build
-  # displayName: 'npm install and build'
-
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
 
 - script: |
    echo building $(Build.BuildNumber) with ${{ parameters.age }}
-  displayName: 'test script'
+  displayName: 'test script 1'
 
 - task: PowerShell@2
+  displayName: 'test script 2'
   inputs:
     targetType: 'inline'
     script: 'Write-Host ${{ parameters.age }}'
 
 - task: PowerShell@2
+  displayName: 'test script 3'
   inputs:
     targetType: 'inline'
     script: 'Write-Host $env:NAME'
 
 - task: Bash@3
+  displayName: 'test Bash 4'
   inputs:
     targetType: 'inline'
     script: 'echo $(name)'
     
 - task: Bash@3
+  displayName: 'test Bash 5'
   inputs:
     targetType: 'inline'
     script: 'echo ${{ parameters.age }}'
 
 - task: Bash@3
+  displayName: 'test Bash 6'
   inputs:
     targetType: 'inline'
     script: 'echo ${{ variables.age }}'

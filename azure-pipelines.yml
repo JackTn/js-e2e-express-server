@@ -5,7 +5,6 @@
 
 parameters:
 - name: age
-  displayName: testParam
   type: number
   default: 1888888
 
@@ -32,7 +31,7 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-   echo building $(Build.BuildNumber) with ${{ parameters.age }} with ${{ parameters.testParam }}
+   echo building $(Build.BuildNumber) with ${{ parameters.age }}
   displayName: 'test script 1'
 
 - task: PowerShell@2

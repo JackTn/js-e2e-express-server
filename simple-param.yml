@@ -12,8 +12,11 @@ stages:
   pool:
     name: 'stages-windows-pool'
     vmImage: windows-latest
-    job:
+  jobs:
+  - job: secure_buildjob
+    steps:
       - script: echo This happens after code  ${{ parameters.yesNo }}
+        displayName: 'test paramters'
   # jobs:
   # - job: secure_buildjob
     # steps:

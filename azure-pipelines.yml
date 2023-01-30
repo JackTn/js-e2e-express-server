@@ -43,6 +43,13 @@ parameters:
   default:
   - one
   - two
+- name: listOfFruits
+  type: object
+  default:
+  - fruitName: 'apple'
+    colors: ['red','green']
+  - fruitName: 'lemon'
+    colors: ['yellow']
 
 
 variables:
@@ -57,8 +64,13 @@ pool:
 
 steps:
 - ${{ each value in parameters.listOfStrings }}:
-- script: echo ${{ value }}
-  displayName: 'loop parameters.listOfStrings'
+  - script: echo ${{ value }}
+    displayName: 'loop parameters.listOfStrings'
+
+- ${{ each fruit in parameters.listOfFruits }} :
+  - ${{ each fruitColor in fruit.colors}} :
+    - script: echo ${{ fruit.fruitName}} ${{ fruitColor }}
+    displayName: 'loop parameters.listOfFruits'
 
 - task: NodeTool@0
   inputs:

@@ -8,11 +8,11 @@ parameters:
   # default: [] # default value of buildSteps
   
 stages:
-- stage: secure_buildstage
+- stage: VSBuildStage
   pool:
     vmImage: windows-latest
   jobs:
-  - job: secure_buildjob
+  - job: VSBuildJob
     steps:
       - script: echo This happens after code  ${{ parameters.yesNo }}
         displayName: 'test paramters'

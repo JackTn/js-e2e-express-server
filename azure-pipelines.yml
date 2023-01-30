@@ -70,7 +70,7 @@ steps:
 - ${{ each fruit in parameters.listOfFruits }} :
   - ${{ each fruitColor in fruit.colors}} :
     - script: echo ${{ fruit.fruitName}} ${{ fruitColor }}
-    displayName: 'loop parameters.listOfFruits'
+      displayName: 'loop parameters.listOfFruits'
 
 - task: NodeTool@0
   inputs:

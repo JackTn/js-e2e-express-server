@@ -1,8 +1,3 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - main
 
@@ -27,8 +22,19 @@ jobs:
   - script: throw error!
     condition: failed() # this step will always run, even if the pipeline is canceled
 
+- job: Foo4
+  steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm run work
+      displayName: 'npm install and build'
+
 - job: Bar
-  dependsOn: Foo3
+  dependsOn: Foo4
   # condition: failed() # this job will only run if Foo fails
   steps:
   - script: echo running Bar

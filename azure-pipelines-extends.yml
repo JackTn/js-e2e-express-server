@@ -15,4 +15,14 @@ extends:
         inputs:
           script: echo "Script Test"
       - script: echo "Script Test"
-      
+    DependsOnList:
+    myJobList: 
+      - job: job1
+        steps:
+          - script: echo joblist job 1
+      - job: job2
+        steps:
+          - script: echo joblist job 2
+      - job: job3
+        steps:
+          - script: echo joblist job 3

@@ -6,6 +6,14 @@ parameters:
 - name: mySteplist 
   type: stepList
   default: []
+
+- name: DependsOnList
+  type: Object
+  default: []
+
+- name: myJobList
+  type: jobList
+  default: []
   
 stages:
 - stage: secure_buildstage
@@ -18,6 +26,13 @@ stages:
         displayName: 'test paramters yesNo'
   - job: mySteplist
     steps: ${{ parameters.mySteplist }}
+
+  - ${{ parameters.myJobList}}
+
+  - job: dependsOnJob
+    dependsOn: secure_buildjob
+    steps: 
+    - script: echo dependsOnJobList
 
     
 

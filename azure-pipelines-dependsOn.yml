@@ -8,20 +8,14 @@ jobs:
 - job: Foo1
   steps:
   - script: echo Hello!
-    condition: always() # this step will always run, even if the pipeline is canceled
-
 
 - job: Foo2
   steps:
   - script: echo Hello!
-    condition: always() # this step will always run, even if the pipeline is canceled
-
 
 - job: Foo3
   steps:
-  - script: throw error!
-    condition: failed() # this step will always run, even if the pipeline is canceled
-
+  - script: echo Hello!
 - job: Foo4
   steps:
     - task: NodeTool@0
@@ -35,12 +29,10 @@ jobs:
 
 - job: Bar1
   dependsOn: [Foo1, Foo2, Foo3, Foo4]
-  # condition: failed() # this job will only run if Foo fails
   steps:
   - script: echo running Bar1
 
 - job: Bar2
   dependsOn: Foo2
-  # condition: failed() # this job will only run if Foo fails
   steps:
   - script: echo running Bar2

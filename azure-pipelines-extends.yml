@@ -1,16 +1,14 @@
 trigger:
 - main
 
-# trigger: none
-
 extends:
   template: simple-param.yml
   parameters:
-    yesNo: true # set to a non-boolean value to have the build fail
+    yesNo: true
     DependsOnList1: [job1, job2]
     DependsOnList2: [job3, job4]
     mySteplist:  
-      - bash: echo Test #Passes
+      - bash: echo Test
         displayName: succeed
       - bash: echo "Test"
         displayName: succeed

@@ -34,13 +34,13 @@ jobs:
       displayName: 'npm install and build'
 
 - job: Bar1
-  dependsOn: Foo4
+  dependsOn: [Foo1, Foo2, Foo3, Foo4]
   # condition: failed() # this job will only run if Foo fails
   steps:
   - script: echo running Bar1
 
 - job: Bar2
-  dependsOn: [Foo1, Foo2, Foo3, Foo4]
+  dependsOn: Foo2
   # condition: failed() # this job will only run if Foo fails
   steps:
   - script: echo running Bar2

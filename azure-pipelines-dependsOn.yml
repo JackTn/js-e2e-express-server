@@ -40,7 +40,7 @@ jobs:
   - script: echo running Bar1
 
 - job: Bar2
-  dependsOn: Foo2
+  dependsOn: [Foo1, Foo2, Foo3, Foo4]
   # condition: failed() # this job will only run if Foo fails
   steps:
   - script: echo running Bar2

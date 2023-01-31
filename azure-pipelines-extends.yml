@@ -1,13 +1,13 @@
-# trigger:
-# - main
+trigger:
+- main
 
-trigger: none
+# trigger: none
 
 extends:
   template: simple-param.yml
   parameters:
     yesNo: true # set to a non-boolean value to have the build fail
-    DependsOnList: ['job1', 'job2', 'job3']
+    DependsOnList: [job1, job2, job3, job4]
     mySteplist:  
       - bash: echo Test #Passes
         displayName: succeed
@@ -27,3 +27,12 @@ extends:
       - job: job3
         steps:
           - script: echo joblist job 3
+      - job: job4
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '10.x'
+            displayName: 'Install Node.js'
+          - script: |
+              npm run work
+            displayName: 'npm install and build'

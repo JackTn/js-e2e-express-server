@@ -69,14 +69,14 @@ stages:
       - script: echo ${{ value }}
         displayName: 'loop parameters.listOfStrings'
 
-    - ${{ each fruit in parameters.listOfFruits }} :
+    - ${{ each fruit in parameters.listOfFruits }}:
       - ${{ each fruitColor in fruit.colors}} :
         - script: echo ${{ fruit.fruitName}} ${{ fruitColor }}
           displayName: 'loop parameters.listOfFruits'
 
-    - ${{ each number in parameters.myNumber }} :
-      - script: echo ${{ number }}
-        displayName: 'loop parameters.myNumber'
+    # - ${{ each number1 in parameters.myNumber }}:
+    #   - script: echo ${{ number1 }}
+    #     displayName: 'loop parameters.myNumber'
 
     # - ${{ each object in parameters.myObject }} :
     #   - ${{ each objectElement in object}} :
@@ -86,6 +86,11 @@ stages:
     # - ${{ if eq(length(parameters.foo), 0) }}:
     #   - script: echo Foo is empty
     #     displayName: Foo is empty
+
+    
+# - ${{ each parameter in parameters }}:
+#   - script: echo ${{ parameter.Key }} 
+#   - script: echo ${{ parameter.Value }}
 
     - task: NodeTool@0
       inputs:

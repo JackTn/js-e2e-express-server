@@ -15,7 +15,6 @@ extends:
         inputs:
           script: echo "Script Test"
       - script: echo "Script Test"
-    DependsOnList:
     myJobList: 
       - job: job1
         steps:

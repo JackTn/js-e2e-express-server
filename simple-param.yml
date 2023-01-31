@@ -7,9 +7,9 @@ parameters:
   type: stepList
   default: []
 
-- name: DependsOnList
-  type: Object
-  default: []
+# - name: DependsOnList
+#   type: Object
+#   default: []
 
 - name: myJobList
   type: jobList

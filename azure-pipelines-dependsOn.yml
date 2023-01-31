@@ -10,11 +10,23 @@ pool:
   vmImage: ubuntu-latest
 
 jobs:
-- job: Foo
+- job: Foo1
+  steps:
+  - script: echo Hello!
+    condition: always() # this step will always run, even if the pipeline is canceled
+
+
+- job: Foo2
+  steps:
+  - script: echo Hello!
+    condition: always() # this step will always run, even if the pipeline is canceled
+
+
+- job: Foo3
   steps:
   - script: echo Hello!
     condition: always() # this step will always run, even if the pipeline is canceled
 
 - job: Bar
-  dependsOn: Foo
+  dependsOn: [Foo1, Foo2, Foo3]
   condition: failed() # this job will only run if Foo fails

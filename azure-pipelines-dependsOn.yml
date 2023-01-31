@@ -29,4 +29,6 @@ jobs:
 
 - job: Bar
   dependsOn: [Foo1, Foo2, Foo3]
-  condition: failed() # this job will only run if Foo fails
+  # condition: failed() # this job will only run if Foo fails
+  steps:
+  - script: echo running Bar

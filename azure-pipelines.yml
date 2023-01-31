@@ -72,6 +72,22 @@ steps:
     - script: echo ${{ fruit.fruitName}} ${{ fruitColor }}
       displayName: 'loop parameters.listOfFruits'
 
+- ${{ each number in parameters.myNumber }} :
+    - script: echo ${{ number }}
+      displayName: 'loop parameters.myNumber'
+
+- ${{ each object in parameters.myObject }} :
+  - ${{ each objectElement in object}} :
+    - script: echo ${{ object.objectElement }}
+      displayName: 'loop parameters.myObject'
+
+- script: ${{ parameters.myStep }}
+  displayName: 'run myStep'
+      
+- ${{ each myStep in parameters.mySteplist }} :
+    - script: ${{ myStep }}
+      displayName: 'loop parameters.mySteplist'
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'

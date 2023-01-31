@@ -87,10 +87,6 @@ stages:
     #   - script: echo Foo is empty
     #     displayName: Foo is empty
 
-    - ${{ each myStep in parameters.mySteplist }} :
-      - script: ${{ myStep }}
-        displayName: 'loop parameters.mySteplist'
-
     - task: NodeTool@0
       inputs:
         versionSpec: '10.x'

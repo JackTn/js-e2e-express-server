@@ -25,7 +25,7 @@ jobs:
 - job: Foo3
   steps:
   - script: echo Hello!
-    condition: always() # this step will always run, even if the pipeline is canceled
+    condition: failed() # this step will always run, even if the pipeline is canceled
 
 - job: Bar
   dependsOn: [Foo1, Foo2, Foo3]

@@ -81,11 +81,11 @@ steps:
 #     - script: echo ${{ object.objectElement }}
 #       displayName: 'loop parameters.myObject'
 
-- task: CmdLine@2
-  displayName: 'run myStep'
-  inputs:
-    script: |
-      ${{ parameters.myStep }}
+# - ${{ if eq(length(parameters.foo), 0) }}:
+#   - script: echo Foo is empty
+#     displayName: Foo is empty
+
+- ${{ parameters.myStep }}
       
 - ${{ each myStep in parameters.mySteplist }} :
     - script: ${{ myStep }}

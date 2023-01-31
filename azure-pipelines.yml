@@ -63,8 +63,10 @@ variables:
 - name: age
   value: 133333 
 
-trigger:
-- main
+# trigger:
+# - main
+
+trigger: none
 
 stages:
 - stage: VSBuildStage

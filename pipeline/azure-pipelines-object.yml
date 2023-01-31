@@ -3,6 +3,20 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+parameters:
+- name: listOfStrings
+  type: object
+  default:
+  - one
+  - two
+- name: listOfFruits
+  type: object
+  default:
+  - fruitName: 'apple'
+    colors: ['red','green']
+  - fruitName: 'lemon'
+    colors: ['yellow']
+
 trigger:
 - main
 
@@ -10,12 +24,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+- ${{ each value in parameters.listOfStrings }}:
+      - script: echo ${{ value }}
+        displayName: 'loop parameters.listOfStrings'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+- ${{ each fruit in parameters.listOfFruits }}:
+  - ${{ each fruitColor in fruit.colors}} :
+    - script: echo ${{ fruit.fruitName}} ${{ fruitColor }}
+      displayName: 'loop parameters.listOfFruits'
+
+

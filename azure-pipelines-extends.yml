@@ -1,5 +1,7 @@
-trigger:
-- main
+# trigger:
+# - main
+
+trigger: none
 
 extends:
   template: simple-param.yml

@@ -55,13 +55,13 @@ parameters:
   default: 
     - job: job1
       steps:
-        - echo joblist job 1
+        - script: echo joblist job 1
     - job: job2
       steps:
-        - echo joblist job 2
+        - script: echo joblist job 2
     - job: job3
       steps:
-        - echo joblist job 3
+        - script: echo joblist job 3
 
 variables:
 - name: age

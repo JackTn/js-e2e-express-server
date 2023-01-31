@@ -33,8 +33,14 @@ jobs:
         npm run work
       displayName: 'npm install and build'
 
-- job: Bar
+- job: Bar1
   dependsOn: Foo4
   # condition: failed() # this job will only run if Foo fails
   steps:
-  - script: echo running Bar
+  - script: echo running Bar1
+
+- job: Bar2
+  dependsOn: Foo2
+  # condition: failed() # this job will only run if Foo fails
+  steps:
+  - script: echo running Bar2

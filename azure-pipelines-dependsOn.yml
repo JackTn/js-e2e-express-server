@@ -24,7 +24,7 @@ jobs:
 
 - job: Foo3
   steps:
-  - script: echo Hello!
+  - script: throw error!
     condition: failed() # this step will always run, even if the pipeline is canceled
 
 - job: Bar

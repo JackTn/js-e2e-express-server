@@ -6,6 +6,7 @@ extends:
   template: simple-param.yml
   parameters:
     yesNo: true # set to a non-boolean value to have the build fail
+    DependsOnList: ['job1', 'job2', 'job3']
     mySteplist:  
       - bash: echo Test #Passes
         displayName: succeed
@@ -15,7 +16,6 @@ extends:
         inputs:
           script: echo "Script Test"
       - script: echo "Script Test"
-    DependsOnList: ['job1', 'job2', 'job3']
     myJobList: 
       - job: job1
         steps:

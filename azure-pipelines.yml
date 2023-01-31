@@ -73,16 +73,19 @@ steps:
       displayName: 'loop parameters.listOfFruits'
 
 - ${{ each number in parameters.myNumber }} :
-    - script: echo ${{ number }}
-      displayName: 'loop parameters.myNumber'
+  - script: echo ${{ number }}
+    displayName: 'loop parameters.myNumber'
 
-- ${{ each object in parameters.myObject }} :
-  - ${{ each objectElement in object}} :
-    - script: echo ${{ object.objectElement }}
-      displayName: 'loop parameters.myObject'
+# - ${{ each object in parameters.myObject }} :
+#   - ${{ each objectElement in object}} :
+#     - script: echo ${{ object.objectElement }}
+#       displayName: 'loop parameters.myObject'
 
-- script: ${{ parameters.myStep }}
+- task: CmdLine@2
   displayName: 'run myStep'
+  inputs:
+    script: |
+      ${{ parameters.myStep }}
       
 - ${{ each myStep in parameters.mySteplist }} :
     - script: ${{ myStep }}

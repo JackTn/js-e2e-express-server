@@ -28,7 +28,7 @@ jobs:
     condition: failed() # this step will always run, even if the pipeline is canceled
 
 - job: Bar
-  dependsOn: [Foo1, Foo2, Foo3]
+  dependsOn: Foo3
   # condition: failed() # this job will only run if Foo fails
   steps:
   - script: echo running Bar

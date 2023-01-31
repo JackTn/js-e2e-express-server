@@ -86,7 +86,7 @@ variables:
   value: 133333 
 
 trigger:
-# - main
+- main
 
 stages:
 - stage: VSBuildStage

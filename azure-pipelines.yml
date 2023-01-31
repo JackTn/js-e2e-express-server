@@ -7,15 +7,6 @@ parameters:
 - name: age
   type: number
   default: 1888888
-- name: myNumber
-  type: number
-  default: 2
-  values:
-  - 1
-  - 2
-  - 4
-  - 8
-  - 16
 - name: myStep
   type: step
   default:

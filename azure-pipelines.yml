@@ -51,7 +51,6 @@ parameters:
   - fruitName: 'lemon'
     colors: ['yellow']
 
-
 variables:
 - name: age
   value: 133333 
@@ -59,79 +58,86 @@ variables:
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+- stage: VSBuildStage
+  pool:
+    vmImage: ubuntu-latest
+  jobs:
+  - job: VSBuildJob
+    steps:
+    - ${{ each value in parameters.listOfStrings }}:
+      - script: echo ${{ value }}
+        displayName: 'loop parameters.listOfStrings'
 
-steps:
-- ${{ each value in parameters.listOfStrings }}:
-  - script: echo ${{ value }}
-    displayName: 'loop parameters.listOfStrings'
+    - ${{ each fruit in parameters.listOfFruits }} :
+      - ${{ each fruitColor in fruit.colors}} :
+        - script: echo ${{ fruit.fruitName}} ${{ fruitColor }}
+          displayName: 'loop parameters.listOfFruits'
 
-- ${{ each fruit in parameters.listOfFruits }} :
-  - ${{ each fruitColor in fruit.colors}} :
-    - script: echo ${{ fruit.fruitName}} ${{ fruitColor }}
-      displayName: 'loop parameters.listOfFruits'
+    - ${{ each number in parameters.myNumber }} :
+      - script: echo ${{ number }}
+        displayName: 'loop parameters.myNumber'
 
-- ${{ each number in parameters.myNumber }} :
-  - script: echo ${{ number }}
-    displayName: 'loop parameters.myNumber'
+    # - ${{ each object in parameters.myObject }} :
+    #   - ${{ each objectElement in object}} :
+    #     - script: echo ${{ object.objectElement }}
+    #       displayName: 'loop parameters.myObject'
 
-# - ${{ each object in parameters.myObject }} :
-#   - ${{ each objectElement in object}} :
-#     - script: echo ${{ object.objectElement }}
-#       displayName: 'loop parameters.myObject'
+    # - ${{ if eq(length(parameters.foo), 0) }}:
+    #   - script: echo Foo is empty
+    #     displayName: Foo is empty
 
-# - ${{ if eq(length(parameters.foo), 0) }}:
-#   - script: echo Foo is empty
-#     displayName: Foo is empty
+    - ${{ each myStep in parameters.mySteplist }} :
+      - script: ${{ myStep }}
+        displayName: 'loop parameters.mySteplist'
 
-- ${{ parameters.myStep }}
-      
-- ${{ each myStep in parameters.mySteplist }} :
-    - script: ${{ myStep }}
-      displayName: 'loop parameters.mySteplist'
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    - script: |
+        npm install
+        npm run build
+      displayName: 'npm install and build'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+    - script: |
+        echo building $(Build.BuildNumber) with ${{ parameters.age }}
+      displayName: 'test script 1'
 
-- script: |
-   echo building $(Build.BuildNumber) with ${{ parameters.age }}
-  displayName: 'test script 1'
+    - task: PowerShell@2
+      displayName: 'test script 2'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host ${{ parameters.age }}'
 
-- task: PowerShell@2
-  displayName: 'test script 2'
-  inputs:
-    targetType: 'inline'
-    script: 'Write-Host ${{ parameters.age }}'
+    - task: PowerShell@2
+      displayName: 'test script 3'
+      inputs:
+        targetType: 'inline'
+        script: 'Write-Host $env:NAME'
 
-- task: PowerShell@2
-  displayName: 'test script 3'
-  inputs:
-    targetType: 'inline'
-    script: 'Write-Host $env:NAME'
+    - task: Bash@3
+      displayName: 'test Bash 4'
+      inputs:
+        targetType: 'inline'
+        script: 'echo $(name)'
 
-- task: Bash@3
-  displayName: 'test Bash 4'
-  inputs:
-    targetType: 'inline'
-    script: 'echo $(name)'
-    
-- task: Bash@3
-  displayName: 'test Bash 5'
-  inputs:
-    targetType: 'inline'
-    script: 'echo ${{ parameters.age }}'
+    - task: Bash@3
+      displayName: 'test Bash 5'
+      inputs:
+        targetType: 'inline'
+        script: 'echo ${{ parameters.age }}'
 
-- task: Bash@3
-  displayName: 'test Bash 6'
-  inputs:
-    targetType: 'inline'
-    script: 'echo ${{ variables.age }}'
+    - task: Bash@3
+      displayName: 'test Bash 6'
+      inputs:
+        targetType: 'inline'
+        script: 'echo ${{ variables.age }}'
 
+  - job: stepList
+    steps: ${{ parameters.mySteplist }}
+
+  - job: myStep
+    steps:
+      - ${{ parameters.myStep }}

@@ -76,23 +76,6 @@ stages:
         - script: echo ${{ fruit.fruitName}} ${{ fruitColor }}
           displayName: 'loop parameters.listOfFruits'
 
-    - ${{ each myObj in parameters.myObject }}:
-      - script: echo ${{ myObj.Key }} 
-        displayName: 'loop parameters.myObject'
-      - script: echo ${{ myObj.Value }}
-        displayName: 'loop parameters.myObject'
-
-    # - ${{ each object in parameters.myObject }} :
-    #   - ${{ each objectElement in object}} :
-    #     - script: echo ${{ object.objectElement }}
-    #       displayName: 'loop parameters.myObject'
-
-    # - ${{ if eq(length(parameters.foo), 0) }}:
-    #   - script: echo Foo is empty
-    #     displayName: Foo is empty
-
-    
-
     - task: NodeTool@0
       inputs:
         versionSpec: '10.x'

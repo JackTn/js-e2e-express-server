@@ -62,7 +62,6 @@ parameters:
     - job: job3
       steps:
         - script: echo joblist job 3
-
 - name: myStageList
   type: stageList
   default: 
@@ -87,7 +86,7 @@ variables:
   value: 133333 
 
 trigger:
-- main
+# - main
 
 stages:
 - stage: VSBuildStage

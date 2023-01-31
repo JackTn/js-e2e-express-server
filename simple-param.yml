@@ -7,9 +7,9 @@ parameters:
   type: stepList
   default: []
 
-- name: DependsOnList
-  type: Object
-  default: []
+# - name: DependsOnList
+#   type: jobList
+#   default: []
 
 - name: myJobList
   type: jobList
@@ -30,7 +30,7 @@ stages:
   - ${{ parameters.myJobList}}
 
   - job: dependsOnJob
-    dependsOn: DependsOnList
+    dependsOn: myJobList
     steps: 
     - script: echo dependsOnJobList
 

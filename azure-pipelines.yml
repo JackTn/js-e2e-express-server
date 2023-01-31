@@ -50,6 +50,18 @@ parameters:
     colors: ['red','green']
   - fruitName: 'lemon'
     colors: ['yellow']
+- name: myJobList
+  type: jobList
+  default: 
+    - job: job1
+      steps:
+        - echo joblist job 1
+    - job: job2
+      steps:
+        - echo joblist job 2
+    - job: job3
+      steps:
+        - echo joblist job 3
 
 variables:
 - name: age
@@ -126,3 +138,5 @@ stages:
   - job: myStep
     steps:
       - ${{ parameters.myStep }}
+
+  - ${{ parameters.myJobList}}

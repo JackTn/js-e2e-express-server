@@ -142,9 +142,6 @@ stages:
     - ${{ each x in split(variables.foo, ',') }}:
       - script: echo ${{ x }}
 
-    # - ${{ each e in split(LISTPARAMTER, ',') }}:
-    #   - script: echo ${{ e }}
-    
     - powershell: |
         $b = "$(listParamter)".Split(",")
         $b[0]
@@ -159,7 +156,8 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ForEach ($p in $(listParamter).Split(",")) {
+          $list = $(listParamter).Split(",")
+          foreach ($p in $list) {
             Write-Host $p
           }
 

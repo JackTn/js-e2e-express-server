@@ -65,6 +65,8 @@ variables:
 - group: my-variable-group-1
 - name: my-variable-myhello
   value: $[variables.myhello]
+- name: foo
+  value: a,b,c,d
 
 trigger:
 - main
@@ -133,9 +135,29 @@ stages:
         targetType: 'inline'
         script: 'echo ${{ variables.age }}'
 
+    - script: echo $(age)
     - script: echo $(myhello)
-    - script: echo $(my-variable-myhello) 
+    - script: echo $(my-variable-myhello)
 
+    - ${{ each x in split(variables.foo, ',') }}:
+      - script: echo ${{ x }}
+
+    - ${{ each e in split(listParamter, ',') }}:
+      - script: echo ${{ e }}
+    
+    - powershell: |
+        $b = "$(listParamter)".Split(",")
+        $b[0]
+        $b[1]
+        $b[2]
+      displayName: 'PowerShell Script'
+
+    - script: |
+            $varsArr = "$(listParamter)".Split(',')
+            foreach ($var in $varsArr)
+            {
+              Write-Host "$var`r`n"
+            }
 
   - job: stepList
     steps: ${{ parameters.mySteplist }}

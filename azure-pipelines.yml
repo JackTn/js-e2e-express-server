@@ -156,7 +156,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          $list = $(listParamter).Split(",")
+          $list = "$(listParamter)".Split(",")
           foreach ($p in $list) {
             Write-Host $p
           }

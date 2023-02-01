@@ -142,8 +142,8 @@ stages:
     - ${{ each x in split(variables.foo, ',') }}:
       - script: echo ${{ x }}
 
-    # - ${{ each e in split($(listParamter), ',') }}:
-    #   - script: echo ${{ e }}
+    - ${{ each e in split(variables.listParamter, ',') }}:
+      - script: echo ${{ e }}
     
     - powershell: |
         $b = "$(listParamter)".Split(",")
@@ -153,11 +153,11 @@ stages:
       displayName: 'PowerShell Script'
 
     - script: |
-            $varsArr = "$(listParamter)".Split(',')
-            foreach ($var in $varsArr)
-            {
-              Write-Host "$var`r`n"
-            }
+        $varsArr = "$(listParamter)".Split(',')
+        foreach ($var in $varsArr)
+        {
+          Write-Host "$var`r`n"
+        }
 
   - job: stepList
     steps: ${{ parameters.mySteplist }}

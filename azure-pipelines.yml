@@ -61,12 +61,15 @@ parameters:
 
 variables:
 - name: age
-  value: 133333 
+  value: 133333
+- group: my-variable-group-1
+- name: my-variable-myhello
+  value: $[variables.myhello]
 
-# trigger:
-# - main
+trigger:
+- main
 
-trigger: none
+# trigger: none
 
 stages:
 - stage: VSBuildStage
@@ -129,6 +132,10 @@ stages:
       inputs:
         targetType: 'inline'
         script: 'echo ${{ variables.age }}'
+
+    - script: echo $(myhello)
+    - script: echo $(my-variable-myhello) 
+
 
   - job: stepList
     steps: ${{ parameters.mySteplist }}

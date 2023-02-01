@@ -159,7 +159,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ForEach ($p in $(listParamter)) {
+          ForEach ($p in $(listParamter).Split(",")) {
             Write-Host $p
           }
 

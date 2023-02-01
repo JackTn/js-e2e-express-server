@@ -142,7 +142,7 @@ stages:
     - ${{ each x in split(variables.foo, ',') }}:
       - script: echo ${{ x }}
 
-    - ${{ each e in split($($(listParamter)), ',') }}:
+    - ${{ each e in split($(LISTPARAMTER), ',') }}:
       - script: echo ${{ e }}
     
     - powershell: |

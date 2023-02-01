@@ -142,7 +142,7 @@ stages:
     - ${{ each x in split(variables.foo, ',') }}:
       - script: echo ${{ x }}
 
-    - ${{ each e in split(variables.listParamter, ',') }}:
+    - ${{ each e in split(listParamter, ',') }}:
       - script: echo ${{ e }}
     
     - powershell: |
@@ -150,14 +150,21 @@ stages:
         $b[0]
         $b[1]
         $b[2]
+        $b[3]
+        $b[4]
       displayName: 'PowerShell Script'
 
-    - script: |
-        $varsArr = $(listParamter).Split(',')
-        foreach ($var in $varsArr)
-        {
-          Write-Host "$var`r`n"
-        }
+    - task: Bash@3
+      displayName: 'Calculate a build number'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $varsArr = $(listParamter).Split(',')
+          echo Computing with $(listParamter) or ${{ variables.listParamter }}
+          foreach ($var in $varsArr)
+          {
+            Write-Host "$var`r`n"
+          }
 
   - job: stepList
     steps: ${{ parameters.mySteplist }}

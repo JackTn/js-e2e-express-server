@@ -1,0 +1,29 @@
+# using group or using split way
+variables:
+- group: my-variable-group-1
+- name: my-variable-myhello
+  value: $[variables.myhello]
+- name: foo
+  value: a,b,c,d
+
+trigger:
+- main
+
+stages:
+- stage: VSBuildStage
+  pool:
+    vmImage: ubuntu-latest
+  jobs:
+  - job: VSBuildJob
+    steps:
+    - ${{ each x in split(variables.foo, ',') }}:
+      - script: echo ${{ x }}
+
+    - powershell: |
+        $b = "$(listParamter)".Split(",")
+        $b[0]
+        $b[1]
+        $b[2]
+        $b[3]
+        $b[4]
+      displayName: 'PowerShell Script'

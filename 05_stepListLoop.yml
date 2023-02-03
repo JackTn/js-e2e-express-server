@@ -1,0 +1,17 @@
+parameters:
+- name: mySteplist
+  type: stepList
+  default:
+    - script: echo step one
+    - script: echo step two
+
+trigger:
+- main
+
+stages:
+- stage: VSBuildStage
+  pool:
+    vmImage: ubuntu-latest
+  jobs:
+  - job: stepList
+    steps: ${{ parameters.mySteplist }}

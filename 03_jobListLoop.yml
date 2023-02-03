@@ -1,0 +1,27 @@
+parameters:
+- name: myJobList
+  type: jobList
+  default: 
+    - job: job1
+      steps:
+        - script: echo joblist job 1
+    - job: job2
+      steps:
+        - script: echo joblist job 2
+    - job: job3
+      steps:
+        - script: echo joblist job 3
+
+trigger:
+- main
+
+stages:
+- stage: VSBuildStage
+  pool:
+    vmImage: ubuntu-latest
+  jobs:
+  - job: VSBuildJob
+    steps:
+    - script: echo jobList script
+  
+  - ${{ parameters.myJobList}}

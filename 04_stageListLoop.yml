@@ -1,0 +1,27 @@
+
+parameters:
+- name: myStageList
+  type: stageList
+  default: 
+    - stage: stageList1
+      jobs:
+      - job: stageList1Job
+        steps:
+        - script: echo stageList1Job
+    - stage: stageList2
+      jobs:
+      - job: stageList2Job
+        steps:
+        - script: echo stageList2Job
+    - stage: stageList3
+      jobs:
+      - job: stageList3Job
+        steps:
+        - script: echo stageList3Job
+        
+trigger:
+- main
+
+stages:
+
+- ${{ parameters.myStageList }}

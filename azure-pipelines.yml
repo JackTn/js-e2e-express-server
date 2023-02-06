@@ -67,6 +67,8 @@ variables:
   value: $[variables.myhello]
 - name: foo
   value: a,b,c,d
+- name: armDirs
+  value: "src/apispecs/test/swagger-rpaas-rp/kaleidoscope,src/apispecs/test/swagger-rpaas-rp/servicelinker,src/apispecs/test/swagger-rpaas-rp/common-types"
 
 trigger:
 - main
@@ -140,6 +142,10 @@ stages:
     - script: echo $(my-variable-myhello)
 
     - ${{ each x in split(variables.foo, ',') }}:
+      - script: echo ${{ x }}
+
+    
+    - ${{ each x in split(variables.armDirs, ',') }}:
       - script: echo ${{ x }}
 
     - powershell: |
